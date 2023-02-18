@@ -33,12 +33,12 @@ function TokenObjectPair({ keyName, value }) {
 function TokenArrayItem({ idx, data }) {
   return typeof data === "object" ? (
     // Break-line, use for array or another object
-    <>
+    <div>
       <div>{idx}:</div>
       <div className="ml-2 pl-2 border-l border-gray-600">
         <MinifiedView data={data} />
       </div>
-    </>
+    </div>
   ) : (
     // Inline, use for non-object types
     <div className="flex flex-row items-center gap-2">
@@ -55,6 +55,9 @@ function TokenArrayItem({ idx, data }) {
 
 function TokenArray({ data }) {
   const [expand, setExpand] = useState(false);
+  const [limit, setLimit] = useState(100);
+  const JUMP_STEP_SIZE = 100; // The number of items will show on one-click
+  // const [page, setPage] = useState(0);
 
   if (!data || !Array.isArray(data)) {
     throw new Error("Unexpected data value");
@@ -62,6 +65,10 @@ function TokenArray({ data }) {
 
   const handleOnChange = (e) => {
     setExpand(e.target.checked);
+  };
+
+  const handleLoadMoreItems = (e) => {
+    setLimit((l) => l + JUMP_STEP_SIZE);
   };
 
   return (
@@ -82,12 +89,23 @@ function TokenArray({ data }) {
       </div>
       {expand && (
         <div className="ml-4">
-          {data.map((datum, idx) => {
-            {
-              /* return <MinifiedView data={datum} key={idx} />; */
-            }
-            return <TokenArrayItem data={datum} key={idx} idx={idx} />;
-          })}
+          {data
+            .filter((_i, _idx) => _idx < limit)
+            .map((datum, idx) => {
+              {
+                /* return <MinifiedView data={datum} key={idx} />; */
+              }
+              return <TokenArrayItem data={datum} key={idx} idx={idx} />;
+            })}
+
+          {limit < data.length && (
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={handleLoadMoreItems}
+            >
+              Load more...
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -95,19 +113,25 @@ function TokenArray({ data }) {
 }
 
 function TokenObject({ data }) {
+  const dataKeys = Object.keys(data);
+  console.log(data);
   return (
     <div>
-      {Object.keys(data).map((keyItem, idx) => {
-        return (
-          <>
-            <TokenObjectPair
-              keyName={keyItem}
-              value={data[keyItem]}
-              key={idx}
-            />
-          </>
-        );
-      })}
+      {dataKeys.length === 0 ? (
+        <div className="b-gray-600">Empty object</div>
+      ) : (
+        <>
+          {dataKeys.map((keyItem, idx) => {
+            return (
+              <TokenObjectPair
+                keyName={keyItem}
+                value={data[keyItem]}
+                key={idx}
+              />
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }
@@ -132,31 +156,11 @@ function MinifiedView({ data }) {
   }
 
   return <TokenUnit data={data} />;
-  // return (
-  //   <div className="">
-  //     <div>Hi = world</div>
-  //     <div>
-  //       <span>array[9]</span>
-  //       <div className="ml-4 border-l-2">
-  //         <div>[0] = a</div>
-  //         <div>[1] = b</div>
-
-  //         <div className="ml-4 border-l-2">
-  //           <div>array[0] = a</div>
-  //           <div>array[1] = b</div>
-  //           <div className="ml-4 border-l-2">
-  //             <div>array[0] = a</div>
-  //             <div>array[1] = b</div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
 }
 
 function HomeMinifiedView() {
   const { tree, rawTree } = useSelector((state) => state.home);
+
   return (
     <div className="flex flex-col">
       {/* Title */}
