@@ -1,27 +1,44 @@
 import Editor from "@monaco-editor/react";
 import React, { useEffect, useState } from "react";
-import FastJson from "fast-json";
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setRawTree, setTree } from "../../slices/HomeSlice";
 
-const EditorArea = ({ onMount }) => {
-  const [deserialized, setDeserialized] = useState(undefined);
+const EditorArea = ({ className }) => {
+  // const []
 
-  useEffect(() => {
-    console.log(deserialized);
-  }, [deserialized]);
-  const handleCodeChange = (e) => {
-    // console.log(e);
-    // console.time("");
-    // new FastJson().write(e);
-    // console.timeEnd("");
-    setDeserialized(JSON.parse(e));
+  const { tree, error, rawTree } = useSelector((state) => state.home);
+  const dispatch = useDispatch();
+
+  const handleOnChange = (context) => {
+    try {
+      const changedTree = JSON.parse(context);
+      dispatch(setTree(changedTree));
+      // Reset the error state
+      dispatch(setError(undefined));
+    } catch (err) {
+      dispatch(setError(err));
+    } finally {
+      dispatch(setRawTree(context));
+    }
   };
+
   return (
-    <Editor
-      className="w-full h-full"
-      defaultLanguage="json"
-      onChange={handleCodeChange}
-      onMount={onMount}
-    />
+    <div className="flex flex-col gap-3">
+      <div className="text-error-content h-8">
+        {error !== undefined && <span>Error detector: {error.message}</span>}
+      </div>
+
+      <div>
+        <Editor
+          value={rawTree}
+          defaultValue={JSON.stringify(tree, null, 2)}
+          theme="vs-dark"
+          defaultLanguage="json"
+          onChange={handleOnChange}
+          className={className}
+        />
+      </div>
+    </div>
   );
 };
 
