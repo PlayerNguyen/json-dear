@@ -1,28 +1,49 @@
-import React, { Suspense, useRef } from "react";
-const EditorArea = React.lazy(() => import("./EditorArea"));
+import React, { useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 function Home() {
-  // const editorRef = useRef(null);
+  const location = useLocation();
+  const [tabs] = useState([
+    {
+      value: "Editor",
+      url: "/",
+    },
+    {
+      value: "Tree view",
+      url: "/tree-view",
+    },
+  ]);
 
   return (
     <div className="home">
       {/* Navbar */}
-      <div className="w-full sticky bg-base-200 flex flex-row px-6 py-6 shadow-sm">
+      <div className="w-full sticky bg-base-200 flex flex-row px-6 py-6 shadow-sm top-0 z-50">
         <h1 className="text-2xl font-bold">Load from raw .json file</h1>
       </div>
 
       {/* Editor Wrapper */}
-      <div className="px-6 py-18 gap-6">
-        <div className="">Safe area for code editor</div>
-        {/* Code Editor */}
+      <div className="flex flex-col max-h-[calc(100vh-64px)]">
+        {/* Export each tab for interaction */}
+        <div className="tabs">
+          {tabs.map((tab, idx) => {
+            // If active, add tab-active into classList
+            let classList = "tab";
+            if (location.pathname === tab.url) {
+              classList += " tab-active";
+            }
 
-        <div className="">
-          <div className="relative bg-base-200 min-h-[90vh]">
-            <Suspense fallback={<div>Code editor initializing</div>}>
-              <EditorArea />
-            </Suspense>
-          </div>
-          <div className="w-1/2">Tree view</div>
+            // Render the tab of items
+            return (
+              <Link className={classList} key={idx} to={tab.url}>
+                {tab.value}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Export body */}
+        <div className="px-4 py-6">
+          <Outlet />
         </div>
       </div>
     </div>
