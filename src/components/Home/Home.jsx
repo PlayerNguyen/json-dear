@@ -12,6 +12,10 @@ function Home() {
       value: "Tree view",
       url: "/tree-view",
     },
+    {
+      value: "Minified view",
+      url: "/minified-view",
+    },
   ]);
 
   return (

@@ -5,6 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Home from "../components/Home/Home";
 import HomeEditor from "../components/Home/HomeEditor";
 import HomeTreeView from "../components/Home/HomeTreeView";
+import HomeMinifiedView from "../components/Home/HomeMinifiedView";
 
 function App() {
   const [sideBarItems] = useState(
@@ -23,6 +24,7 @@ function App() {
           <Route path={"/"} element={<Home />}>
             <Route path="" index element={<HomeEditor />}></Route>
             <Route path="/tree-view" element={<HomeTreeView />}></Route>
+            <Route path="/minified-view" element={<HomeMinifiedView />} />
           </Route>
         </Routes>
         {/* <label
