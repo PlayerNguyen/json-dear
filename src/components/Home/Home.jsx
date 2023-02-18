@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { HiViewList } from "react-icons/hi";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 function Home() {
@@ -21,8 +22,15 @@ function Home() {
   return (
     <div className="home">
       {/* Navbar */}
-      <div className="w-full sticky bg-base-200 flex flex-row px-6 py-6 shadow-sm top-0 z-50">
-        <h1 className="text-2xl font-bold">Load from raw .json file</h1>
+      <div className="w-full sticky bg-base-200 flex flex-row px-6 py-6 shadow-sm top-0 z-50 items-center gap-4">
+        <div className="lg:hidden">
+          <label className="btn btn-ghost btn-md text-xl" htmlFor="main-drawer">
+            <HiViewList />
+          </label>
+        </div>
+        <div>
+          <h1 className="text-xl font-bold">Load from json text</h1>
+        </div>
       </div>
 
       {/* Editor Wrapper */}
