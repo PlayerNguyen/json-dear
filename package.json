@@ -2,6 +2,7 @@
   "name": "json-dear",
   "version": "1.1.0",
   "license": "MIT",
+  "homepage": "https://playernguyen.github.io/json-dear/",
   "scripts": {
     "build": "rimraf ./dist && parcel build ./src/index.html --public-url=./ --no-cache",
     "dev": "parcel ./src/index.html"
