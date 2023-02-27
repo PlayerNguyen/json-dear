@@ -54,7 +54,7 @@ function Home() {
         </div>
 
         {/* Export body */}
-        <div className="px-4 py-6">
+        <div className="px-4">
           <Outlet />
         </div>
       </div>

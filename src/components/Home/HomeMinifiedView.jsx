@@ -162,7 +162,7 @@ function HomeMinifiedView() {
   return (
     <div className="flex flex-col">
       {/* Title */}
-      <div>Minified tree view</div>
+      <div className="font-bold text-2xl">Minified tree view</div>
       <div className=" py-2 rounded-xl flex flex-row gap-2 w-full overflow-auto">
         <span>Root: </span>
         <div>{tree !== undefined && <MinifiedView data={tree} />}</div>
