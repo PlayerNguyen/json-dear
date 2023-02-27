@@ -16,7 +16,6 @@ function isUrl(provider) {
 }
 
 function TokenUnit({ data }) {
-  console.log(typeof data);
   return (
     <div className="flex flex-row gap-2">
       {typeof data === "string" ? (
@@ -143,6 +142,11 @@ function TokenArray({ data }) {
 }
 
 function TokenObject({ data }) {
+  // Empty data join the compiler
+  if (data === null || data === undefined) {
+    return <div className="b-gray-600">Empty object</div>;
+  }
+
   const dataKeys = Object.keys(data);
   return (
     <div>
