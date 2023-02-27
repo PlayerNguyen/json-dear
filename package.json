@@ -1,6 +1,7 @@
 {
   "name": "json-dear",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "description": "The web application based JSON editor with powerful utilities",
   "license": "MIT",
   "homepage": "https://playernguyen.github.io/json-dear/",
   "scripts": {
