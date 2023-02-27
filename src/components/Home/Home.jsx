@@ -29,7 +29,7 @@ function Home() {
           </label>
         </div>
         <div>
-          <h1 className="text-xl font-bold">Load from json text</h1>
+          <h1 className="text-xl font-bold">.json</h1>
         </div>
       </div>
 
