@@ -6,6 +6,8 @@ A power utility web application for handle json extension written by React.
 - Scalable with components
 - Load from text/file.
 
+**[Click Here to visit the page](https://playernguyen.github.io/json-dear)**
+
 # Development
 
 **Requirements**
@@ -19,11 +21,12 @@ To **pre-run** application, you must install all dependencies by execute follow 
 
 # Contributions
 
-Feel free to contribute into the repository. However, __create an issues__ is a procedure for your code to be approved.
+Feel free to contribute into the repository. However, **create an issues** is a procedure for your code to be approved.
 
-__Find any bugs? Please create a [ticket](https://github.com/PlayerNguyen/json-dear/issues) for help.__
+**Find any bugs? Please create a [ticket](https://github.com/PlayerNguyen/json-dear/issues) for help.**
+
 # License
 
 The application is under MIT license and followed by all other dependencies license.
 
-__See [LICENSE.md](LICENSE.md)__
+**See [LICENSE.md](LICENSE.md)**
