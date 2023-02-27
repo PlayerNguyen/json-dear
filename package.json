@@ -1,6 +1,7 @@
 {
   "name": "json-dear",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "description": "The web application based JSON editor with powerful utilities",
   "license": "MIT",
   "homepage": "https://playernguyen.github.io/json-dear/",
   "scripts": {
@@ -24,6 +25,7 @@
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
+    "react-toastify": "^9.1.1",
     "tailwindcss": "^3.2.6"
   }
 }
