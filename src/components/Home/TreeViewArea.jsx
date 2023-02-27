@@ -29,9 +29,8 @@ function TreeViewArrayItem({ title, data }) {
           </div>
         )
       ) : (
-        <div className="pl-12 border-l-2 border-secondary text-neutral">
-          {" "}
-          = {data}
+        <div className="pl-12 border-l-2 border-secondary text-content-base">
+          <TreeViewWalker data={data} />
         </div>
       )}
     </div>
@@ -39,7 +38,7 @@ function TreeViewArrayItem({ title, data }) {
 }
 
 function TreeViewObjectValue({ data }) {
-  return <div className="font-light text-base">{"= " + data}</div>;
+  return <div className="font-light text-base-content">{"= " + data}</div>;
 }
 
 function TreeViewWalker({ data }) {
@@ -59,6 +58,10 @@ function TreeViewWalker({ data }) {
     );
   }
 
+  if (data === null) {
+    return <div>null</div>;
+  }
+
   // object is not an array
   if (typeof data === "object") {
     const keyList = Object.keys(data);
@@ -67,10 +70,10 @@ function TreeViewWalker({ data }) {
       return (
         <div
           key={_idx}
-          className="flex flex-row items-start px-2 py-2 text-sm hover:bg-base-200 transition-all ease-linear"
+          className="flex flex-col items-start px-2 py-2 text-sm hover:border-r-2 hover:border-primary transition-all ease-linear"
         >
           {/* Key name */}
-          <div className="font-bold mr-4 w-1/12 text-base-content overflow-x-auto overflow-hidden">
+          <div className="font-bold mr-4 text-base-content overflow-x-auto overflow-hidden">
             {"{/} " + keyName}
           </div>
 

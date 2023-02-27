@@ -10,7 +10,7 @@ import HomeMinifiedView from "../components/Home/HomeMinifiedView";
 function App() {
   const [sideBarItems] = useState([
     {
-      name: "Load from json text",
+      name: ".json",
       icon: <HiCode />,
       url: "/",
     },
