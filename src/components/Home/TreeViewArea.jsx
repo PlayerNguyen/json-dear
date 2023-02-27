@@ -58,6 +58,10 @@ function TreeViewWalker({ data }) {
     );
   }
 
+  if (data === null) {
+    return <div>null</div>;
+  }
+
   // object is not an array
   if (typeof data === "object") {
     const keyList = Object.keys(data);

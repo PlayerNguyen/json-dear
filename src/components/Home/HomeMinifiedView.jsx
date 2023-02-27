@@ -143,8 +143,8 @@ function TokenArray({ data }) {
 
 function TokenObject({ data }) {
   // Empty data join the compiler
-  if (data === null || data === undefined) {
-    return <div className="b-gray-600">Empty object</div>;
+  if (data === null) {
+    return <div className="b-gray-600">null</div>;
   }
 
   const dataKeys = Object.keys(data);
