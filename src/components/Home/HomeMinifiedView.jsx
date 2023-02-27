@@ -3,7 +3,6 @@ import { HiArrowRight, HiChevronDown, HiChevronLeft } from "react-icons/hi";
 import { useSelector } from "react-redux";
 
 function TokenUnit({ data }) {
-  // console.log(data);
   return (
     <div>
       {String(data)} <span className="text-gray-600">({typeof data})</span>
@@ -114,7 +113,6 @@ function TokenArray({ data }) {
 
 function TokenObject({ data }) {
   const dataKeys = Object.keys(data);
-  console.log(data);
   return (
     <div>
       {dataKeys.length === 0 ? (
@@ -165,9 +163,9 @@ function HomeMinifiedView() {
     <div className="flex flex-col">
       {/* Title */}
       <div>Minified tree view</div>
-      <div className="px-2 py-2 rounded-xl flex flex-row gap-2">
+      <div className=" py-2 rounded-xl flex flex-row gap-2 w-full overflow-auto">
         <span>Root: </span>
-        {tree !== undefined && <MinifiedView data={tree} />}
+        <div>{tree !== undefined && <MinifiedView data={tree} />}</div>
       </div>
     </div>
   );
