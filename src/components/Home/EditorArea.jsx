@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setError, setRawTree, setTree } from "../../slices/HomeSlice";
 
@@ -24,9 +24,11 @@ const EditorArea = ({ className }) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="text-error-content h-8">
-        {error !== undefined && <span>Error detector: {error.message}</span>}
-      </div>
+      {error !== undefined && (
+        <div className="text-error-content text-sm">
+          <span>Error detector: {error.message}</span>
+        </div>
+      )}
 
       <div>
         <Editor
