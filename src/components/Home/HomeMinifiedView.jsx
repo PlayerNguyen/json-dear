@@ -1,11 +1,42 @@
 import React, { useState } from "react";
 import { HiArrowRight, HiChevronDown, HiChevronLeft } from "react-icons/hi";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+/**
+ * Test if the provide string is url or not.
+ * @param {*} provider a string to check
+ * @returns true if the provider string is url, false otherwise
+ */
+function isUrl(provider) {
+  const matcher = new RegExp(
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+  );
+  return matcher.test(provider);
+}
 
 function TokenUnit({ data }) {
+  console.log(typeof data);
   return (
-    <div>
-      {String(data)} <span className="text-gray-600">({typeof data})</span>
+    <div className="flex flex-row gap-2">
+      {typeof data === "string" ? (
+        // String with url
+        isUrl(data) ? (
+          <Link to={data} target="_blank">
+            <span className="text-green-600 underline">'{String(data)}'</span>
+          </Link>
+        ) : (
+          // String with non-url
+          <span className="text-green-600">'{String(data)}'</span>
+        )
+      ) : typeof data === "number" ? ( // Represent a number
+        <span className="text-indigo-600">{String(data)}</span>
+      ) : (
+        // Any other type
+        <span className="">{String(data)}</span>
+      )}
+
+      <span className="text-gray-600">({typeof data})</span>
     </div>
   );
 }
@@ -21,7 +52,7 @@ function TokenObjectPair({ keyName, value }) {
   ) : (
     <div className="flex flex-row gap-2">
       <span className="text-accent">{keyName}</span>
-      <span className="text-base-100"> {": "} </span>
+      <span className="text-neutral-400"> {": "} </span>
       <span className="">
         <MinifiedView data={value} />
       </span>
